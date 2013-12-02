@@ -12,7 +12,6 @@ default["statsd"]["delete_gauges"]                = false
 default["statsd"]["delete_sets"]                  = false
 default["statsd"]["delete_counters"]              = false
 default["statsd"]["username"]                     = "statsd"
-default["statsd"]["config"]                       = {}
 default["statsd"]["backends"]["enabled"]          = []
 
 # Backends default configuration
