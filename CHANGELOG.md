@@ -1,3 +1,9 @@
+## v1.2.0
+
+* Add suport for backends.
+* Add backend plugin fetch via remote_file.
+* Add zabbix backend plugin.
+
 ## v1.1.5
 
 * Fixed issue with non-HTTPS Git repository was triggering an error on RHEL.

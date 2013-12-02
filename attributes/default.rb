@@ -6,16 +6,23 @@ default["statsd"]["flush_interval"]               = 10000
 default["statsd"]["percent_threshold"]            = 90
 default["statsd"]["address"]                      = "0.0.0.0"
 default["statsd"]["port"]                         = 8125
-default["statsd"]["graphite_host"]                = "127.0.0.1"
-default["statsd"]["graphite_port"]                = 2003
-default["statsd"]["graphite_role"]                = "graphite_server"
-default["statsd"]["graphite_query"]               = "roles:#{node['statsd']['graphite_role']} AND chef_environment:#{node.chef_environment}"
 default["statsd"]["delete_idle_stats"]            = false
 default["statsd"]["delete_timers"]                = false
 default["statsd"]["delete_gauges"]                = false
 default["statsd"]["delete_sets"]                  = false
 default["statsd"]["delete_counters"]              = false
 default["statsd"]["username"]                     = "statsd"
+default["statsd"]["config"]                       = {}
+default["statsd"]["plugins"]["enabled"]           = []
+
+# Backends default configuration
+default["statsd"]["graphite_host"]                = "127.0.0.1"
+default["statsd"]["graphite_port"]                = 2003
+default["statsd"]["graphite_role"]                = "graphite_server"
+default["statsd"]["graphite_query"]               = "roles:#{node['statsd']['graphite_role']} AND chef_environment:#{node.chef_environment}"
+default["statsd"]["zabbix_host"]                  = "127.0.0.1"
+default["statsd"]["zabbix_port"]                  = 10051
+default["statsd"]["zabbix_sender"]                = "/usr/bin/zabbix_sender"
 
 # Graphite storage config
 default["statsd"]["graphite"]["legacy_namespace"] = true
