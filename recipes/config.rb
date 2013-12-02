@@ -16,22 +16,22 @@ config = node.default["statsd"]["config"]
   config[opt4statsd(o)] = node['statsd'][o]
 end
 
-plugin_opts = {
+backend_opts = {
   graphite: %w(graphite_host graphite_port),
   zabbix:   %w(zabbix_host zabbix_port zabbix_sender) 
 }
 
-enabled = node["statsd"]["plugins"]["enabled"]
+enabled = node["statsd"]["backends"]["enabled"]
 enabled = ['graphite'] if enabled.empty?
 
 # Configure backend specific options
-enabled.each do |plugin|
-  (plugin_opts[plugin.to_sym] || []).each do |o|
+enabled.each do |backend|
+  (backend_opts[backend.to_sym] || []).each do |o|
     config[opt4statsd(o)] = node['statsd'][o]
   end
 
-  bndcf = node["statsd"][plugin]
-  config[plugin] = bndcf unless bndcf.nil? || bndcf.empty?
+  bndcf = node["statsd"][backend]
+  config[backend] = bndcf unless bndcf.nil? || bndcf.empty?
 end
 
 if enabled.include?("graphite")
@@ -40,4 +40,3 @@ if enabled.include?("graphite")
     addr and config[:graphiteHost] = addr
   end
 end
-
