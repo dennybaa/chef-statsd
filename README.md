@@ -30,10 +30,6 @@ Installs and configures StatsD.
 * `node["statsd"]["percent_threshold"]` - Nth percentile value(s). Single value or array.
 * `node["statsd"]["address"]` - Address to bind StatsD to.
 * `node["statsd"]["port"]` - Port to run StatsD on.
-* `node["statsd"]["graphite_host"]` - Graphite host.
-* `node["statsd"]["graphite_port"]` - Graphite port.
-* `node["statsd"]["graphite_role"]` - Graphite role for automatic discovery.
-* `node["statsd"]["graphite_query"]` - Graphite query for automatic discovery.
 * `node["statsd"]["delete_idle_stats"]` - Don't send values to graphite for
   inactive stats (default: `false`).
 * `node["statsd"]["delete_timers"]` - Don't send values to graphite for
@@ -46,6 +42,18 @@ Installs and configures StatsD.
   inactive counters (default: `false`).
 * `node["statsd"]["username"]` - Will be used for process supervision (default: `stasd` )
 
+### General backend attributes
+
+* `node["statsd"]["graphite_host"]` - Graphite host.
+* `node["statsd"]["graphite_port"]` - Graphite port.
+* `node["statsd"]["graphite_role"]` - Graphite role for automatic discovery.
+* `node["statsd"]["graphite_query"]` - Graphite query for automatic discovery.
+* `node["statsd"]["zabbix_host"]` - Zabbix host.
+* `node["statsd"]["zabbix_port"]` - Zabbix port.
+* `node["statsd"]["zabbix_sender"]` - Path to zabbix sender binary. **defaut**: `'/usr/bin/zabbix_sender'`.
+* `nodes["statsd"]["backends"]["enabled"]` - List of enabled backends. **default** is `[]`. When the list is empty graphite backend will be enabled by automatically.
+
+### Graphite backend attributes
 * `node["statsd"]["graphite"]["legacy_namespace"]` - Flag to use legacy
   namespace (default: `true`).
 * `node["statsd"]["graphite"]["global_prefix"]` - Global prefix to use for
@@ -66,3 +74,11 @@ Installs and configures StatsD.
 ## Usage
 
 Currently only supports installation via a Git repository.
+
+### Using StatsD backends
+
+This cookbook provides `statsd.backends.enabled` attribute to manage backends that will be enabled. During installation **statsd::install** recipe will fethch enabled backends (except built-in).
+
+Currently available backends: ***graphite***, ***zabbix***. 
+
+Extending cookbook whith other backends support is made trival. 
