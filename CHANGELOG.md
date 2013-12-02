@@ -1,8 +1,8 @@
 ## v1.2.0
 
 * Add suport for backends.
-* Add backend plugin fetch via remote_file.
-* Add zabbix backend plugin.
+* Add backend fetch via remote_file.
+* Add zabbix backend.
 
 ## v1.1.5
 

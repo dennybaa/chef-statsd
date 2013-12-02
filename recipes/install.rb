@@ -14,23 +14,23 @@ end
 backends = node.default["statsd"]["backends"]
 backends = Array.new
 
-node["statsd"]["plugins"]["enabled"].each do |plugin|
-  conf = node["statsd"]["plugins"][plugin]
+node["statsd"]["backends"]["enabled"].each do |backend|
+  conf = node["statsd"]["backends"][backend]
 
-  # enable built-in plugins
+  # assuming that the backend is the built-in one, we enable it
   if conf.nil?
-    backends << "./backends/#{plugin}"; next
+    backends << "./backends/#{backend}"; next
   end
 
   case conf["install_method"]
   when "remote_file"
-    remote_file plugin do
+    remote_file backend do
       mode    0644
-      path    "#{node['statsd']['dir']}/backends/#{plugin}.js"
+      path    "#{node['statsd']['dir']}/backends/#{backend}.js"
       source  conf["uri"]
     end
-    backends << "./backends/#{plugin}"
+    backends << "./backends/#{backend}"
   else
-    raise NotImplementedError, "[statsd] plugin install method `#{conf['install_method']} not supported'"
+    raise NotImplementedError, "[statsd] backend install method `#{conf['install_method']} not supported'"
   end
 end
