@@ -11,8 +11,8 @@ directory node["statsd"]["conf_dir"] do
   action :create
 end
 
-backends = node.default["statsd"]["backends"]
-backends = Array.new
+node.default["statsd"]["config"]["backends"] = Array.new
+backends = node.default["statsd"]["config"]["backends"]
 
 node["statsd"]["backends"]["enabled"].each do |backend|
   conf = node["statsd"]["backends"][backend]
